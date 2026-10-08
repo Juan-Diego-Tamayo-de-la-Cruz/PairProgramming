@@ -1,9 +1,3 @@
-// ============================================================
-// CURRENCY EXPLORER · STARTER PROJECT
-// Archivo principal de trabajo para las misiones de JavaScript
-// ============================================================
-
-// 1. REFERENCIAS AL DOM
 const cantidad = document.querySelector("#cantidad");
 const origen = document.querySelector("#origen");
 const destino = document.querySelector("#destino");
@@ -13,68 +7,96 @@ const resultado = document.querySelector("#resultado");
 const resultadoTexto = document.querySelector("#resultadoTexto");
 const detalleTasa = document.querySelector("#detalleTasa");
 
-// 2. EVENTOS
 btnConvertir.addEventListener("click", convertirMoneda);
 btnIntercambiar.addEventListener("click", intercambiarMonedas);
 
-// 3. FUNCIÓN PRINCIPAL
 async function convertirMoneda() {
-  // Misiones guiadas 1-3: ya existe un flujo mínimo funcional EUR -> USD.
-  // A partir de la Misión 4 debes convertirlo en una solución dinámica.
-
   const valor = Number(cantidad.value);
+  const monedaOrigen = origen.value;
+  const monedaDestino = destino.value;
 
-  // TODO · MISIÓN 07: sustituir esta validación mínima por una validación completa.
-  if (!Number.isFinite(valor) || valor <= 0) {
+  if (
+    cantidad.value.trim() === "" ||
+    !Number.isFinite(valor) ||
+    valor <= 0
+  ) {
     mostrarError("Escribe una cantidad mayor que cero.");
     return;
   }
 
-  // TODO · MISIÓN 04: reemplazar EUR y USD por los valores elegidos en los <select>.
-  const monedaOrigen = "EUR";
-  const monedaDestino = "USD";
+  if (monedaOrigen === monedaDestino) {
+    mostrarResultado(valor, 1, monedaOrigen, monedaDestino, "Sin consulta");
+    return;
+  }
 
   const url = `https://api.frankfurter.dev/v2/rate/${monedaOrigen}/${monedaDestino}`;
 
+  activarCarga();
+
   try {
-    // TODO · MISIÓN 08: activar un estado visual de carga antes de consultar.
     const respuesta = await fetch(url);
 
-    // TODO · MISIÓN 09: comprobar response.ok y lanzar un error si corresponde.
+    if (!respuesta.ok) {
+      throw new Error(`La API respondió con HTTP ${respuesta.status}.`);
+    }
+
     const datos = await respuesta.json();
+    const tasa = Number(datos.rate);
 
-    const conversion = valor * datos.rate;
+    if (!Number.isFinite(tasa)) {
+      throw new Error("La API no devolvió una tasa válida.");
+    }
 
-    resultado.classList.remove("error");
-    resultadoTexto.textContent = `${valor.toFixed(2)} ${monedaOrigen} = ${conversion.toFixed(2)} ${monedaDestino}`;
-    detalleTasa.textContent = `1 ${monedaOrigen} = ${datos.rate} ${monedaDestino} · ${datos.date}`;
-
+    mostrarResultado(valor, tasa, monedaOrigen, monedaDestino, datos.date);
   } catch (error) {
-    // TODO · MISIÓN 09: mejora el mensaje y analiza qué errores pueden llegar aquí.
-    mostrarError("No fue posible completar la consulta.");
-    console.error(error);
+    mostrarError(
+      "No fue posible consultar el tipo de cambio. " +
+      "Verifica tu conexión e inténtalo nuevamente."
+    );
+    console.error("Error al convertir monedas:", error);
+  } finally {
+    desactivarCarga();
   }
 }
 
 function intercambiarMonedas() {
-  // TODO · MISIÓN 06:
-  // 1) guardar temporalmente el valor de origen
-  // 2) intercambiar origen.value y destino.value
-  // 3) volver a calcular
-  mostrarError("Misión 06 pendiente: implementa el intercambio de monedas.");
+  const monedaTemporal = origen.value;
+  origen.value = destino.value;
+  destino.value = monedaTemporal;
+
+  convertirMoneda();
 }
 
-// 4. UTILIDADES DE INTERFAZ
+function mostrarResultado(valor, tasa, monedaOrigen, monedaDestino, fecha) {
+  const conversion = valor * tasa;
+
+  resultado.classList.remove("error");
+  resultadoTexto.textContent =
+    `${valor.toFixed(2)} ${monedaOrigen} = ` +
+    `${conversion.toFixed(2)} ${monedaDestino}`;
+  detalleTasa.textContent =
+    fecha === "Sin consulta"
+      ? `1 ${monedaOrigen} = 1 ${monedaDestino}`
+      : `1 ${monedaOrigen} = ${tasa} ${monedaDestino} · ${fecha}`;
+}
+
+function activarCarga() {
+  btnConvertir.disabled = true;
+  btnIntercambiar.disabled = true;
+  btnConvertir.textContent = "Consultando...";
+  resultado.classList.remove("error");
+  resultadoTexto.textContent = "Consultando el tipo de cambio...";
+  detalleTasa.textContent = "Espera un momento.";
+}
+
+function desactivarCarga() {
+  btnConvertir.disabled = false;
+  btnIntercambiar.disabled = false;
+  btnConvertir.textContent = "Convertir";
+}
+
 function mostrarError(mensaje) {
   resultado.classList.add("error");
   resultadoTexto.textContent = mensaje;
   detalleTasa.textContent = "Revisa los datos e inténtalo nuevamente.";
 }
-
-// PISTA PARA EL RETO:
-// origen.value        -> moneda seleccionada como origen
-// destino.value       -> moneda seleccionada como destino
-// cantidad.value      -> texto escrito en el input
-// Number(...)         -> convierte texto a número
-// response.ok         -> indica si la respuesta HTTP fue satisfactoria
-// resultado.textContent -> permite modificar texto del DOM
