@@ -36,8 +36,14 @@ async function convertirMoneda() {
 
   const url = `https://api.frankfurter.dev/v2/rate/${monedaOrigen}/${monedaDestino}`;
 
+  resultado.classList.remove("error");
+  resultado.classList.add("loading");
+  resultado.setAttribute("aria-busy", "true");
+  resultadoTexto.textContent = "Consultando tipo de cambio...";
+  detalleTasa.textContent = "Conectando con Frankfurter API.";
+  btnConvertir.disabled = true;
+
   try {
-    // TODO · MISIÓN 08: activar un estado visual de carga antes de consultar.
     const respuesta = await fetch(url);
 
     // TODO · MISIÓN 09: comprobar response.ok y lanzar un error si corresponde.
@@ -45,7 +51,6 @@ async function convertirMoneda() {
 
     const conversion = valor * datos.rate;
 
-    resultado.classList.remove("error");
     resultadoTexto.textContent = `${valor.toFixed(2)} ${monedaOrigen} = ${conversion.toFixed(2)} ${monedaDestino}`;
     detalleTasa.textContent = `1 ${monedaOrigen} = ${datos.rate} ${monedaDestino} · ${datos.date}`;
 
@@ -53,10 +58,18 @@ async function convertirMoneda() {
     // TODO · MISIÓN 09: mejora el mensaje y analiza qué errores pueden llegar aquí.
     mostrarError("No fue posible completar la consulta.");
     console.error(error);
+  } finally {
+    resultado.classList.remove("loading");
+    resultado.removeAttribute("aria-busy");
+    btnConvertir.disabled = false;
   }
 }
 
 function intercambiarMonedas() {
+  // TODO · MISIÓN 06:
+  // 1) guardar temporalmente el valor de origen
+  // 2) intercambiar origen.value y destino.value
+  // 3) volver a calcular
   const monedaTemporal = origen.value;
   origen.value = destino.value;
   destino.value = monedaTemporal;
