@@ -10,13 +10,13 @@
 ## Pair Programming
 | Misión | Driver | Navigator | Commit / evidencia |
 |---|---|---|---|
-| 04 | Andres | Tamayo | |
-| 05 | Tamayo | Andres | |
-| 06 | Andres | Tamayo | |
-| 07 | Tamayo | Andres | |
-| 08 | | | |
-| 09 | | | |
-| 10 | | | |
+| 04 | Andres | Tamayo | Monedas dinámicas |
+| 05 | Tamayo | Andres | Resultado en el DOM |
+| 06 | Andres | Tamayo | Intercambio de monedas |
+| 07 | Tamayo | Andres | Validación completa |
+| 08 | Tamayo | Andres | Estado de carga |
+| 09 | Tamayo | Andres | Errores HTTP y de red |
+| 10 | Tamayo | Andres | Documentación y revisión |
 
 ## Objetivo
 Completar una aplicación frontend que consuma Frankfurter API para convertir divisas y demostrar comprensión de eventos, DOM, `fetch()`, JSON, asincronía, validación y manejo de errores.
@@ -45,7 +45,8 @@ Endpoint de referencia:
 4. Cuando la moneda de origen y destino son iguales, se utiliza una tasa de 1
    sin consultar la API.
    
-5. En vez de usar live server, solo guardabamos con ctrl+s el proyecto y en el navegador refrescabamos el index y se visualizaban los cambios 
+5. En vez de usar Live Server, guardábamos con Ctrl+S y actualizábamos el
+   navegador para visualizar los cambios.
 6. Decidimos usar Live Share para realizar pair programming remoto en línea y en
    tiempo real, viendo los cambios del código de cada integrante.
 7. Usamos GitHub para trabajar en distintos momentos y conservar el historial
@@ -61,6 +62,24 @@ Endpoint de referencia:
 
 
 ## Reflexión final (150–200 palabras)
-Explica el principal aprendizaje técnico, una dificultad relevante y una decisión que haya surgido del trabajo Driver/Navigator.
 
-Andres Herrera Oettinghaus: Esta práctica ha sido bastante enriquecedora. Implementamos las modalidades de remote pair programming y driver-navigator, lo que nos permitió familiarizarnos con herramientas como GitHub y Visual Studio Live Share. Durante la dinámica de driver-navigator, asumí principalmente el rol de navegador: observé las modificaciones en el código, hice preguntas sobre los cambios y aporté mis ideas sobre la dirección del proyecto (por ejemplo, inicializar el repositorio en GitHub antes de escribir código o decidir si utilizar Live Server). Sin lugar a duda, al ser el integrante menos técnico del equipo, el intercambio de conocimientos que ofrece esta forma de trabajo fue muy valioso para mí. Dado que mi compañero ya cuenta con experiencia en la industria, he aprendido al verlo trabajar y dialogar con él.
+Durante esta práctica aprendimos a construir una aplicación frontend que consume
+una API pública y actualiza el DOM sin recargar la página. El aprendizaje
+principal fue entender el flujo completo de una petición asíncrona: validar los
+datos del formulario, construir la URL, esperar la respuesta, comprobar el
+estado HTTP y mostrar un resultado o un mensaje de error.
+
+Una dificultad importante fue coordinar los cambios realizados por los dos
+integrantes en GitHub. También tuvimos que resolver conflictos porque algunas
+misiones se desarrollaron en momentos diferentes. La solución fue revisar cada
+versión, conservar las mejoras compatibles y comprobar que el proyecto
+mantuviera su estructura de HTML, CSS y JavaScript.
+
+En el trabajo Driver/Navigator, el Driver implementaba la solución mientras el
+Navigator revisaba la lógica, proponía casos de prueba y señalaba posibles
+errores. A partir de esa revisión decidimos deshabilitar los botones durante la
+consulta, validar respuestas HTTP y manejar el caso en que las dos monedas son
+iguales. También utilizamos Live Share para observar cambios en tiempo real y
+GitHub para continuar el trabajo de forma asíncrona. La experiencia mostró que
+la comunicación y la revisión constante son tan importantes como escribir el
+código.
