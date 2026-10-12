@@ -4,23 +4,19 @@
 
 
 ## Integrantes
-- Estudiante A: Andres Herrera Oettinghaus
-- Estudiante B: Juan Diego Tamayo de la Cruz
-
-
-
+- Estudiante A: Tamayo de la Cruz Juan Diego
+- Estudiante B: Andres Herrera Oettinghaus
 
 ## Pair Programming
 | Misión | Driver | Navigator | Commit / evidencia |
 |---|---|---|---|
-| 04 | Nombre A | Nombre B | Lectura dinámica de origen y destino |
-| 05 | Nombre B | Nombre A | Resultado actualizado desde el DOM |
-| 06 | Nombre A | Nombre B | Intercambio de monedas |
-| 07 | Nombre B | Nombre A | Validación de cantidad y monedas |
-| 08 | Nombre A | Nombre B | Estado visual de carga |
-| 09 | Nombre B | Nombre A | Manejo de errores HTTP y de red |
-| 10 | Nombre A | Nombre B | Documentación y revisión final |
-
+| 04 | Andres | Tamayo | |
+| 05 | Tamayo | Andres | |
+| 06 | Andres | Tamayo | |
+| 07 | Tamayo | Andres | |
+| 08 | | | |
+| 09 | | | |
+| 10 | | | |
 
 ## Objetivo
 Completar una aplicación frontend que consuma Frankfurter API para convertir divisas y demostrar comprensión de eventos, DOM, `fetch()`, JSON, asincronía, validación y manejo de errores.
@@ -50,7 +46,10 @@ Endpoint de referencia:
    sin consultar la API.
    
 5. En vez de usar live server, solo guardabamos con ctrl+s el proyecto y en el navegador refrescabamos el index y se visualizaban los cambios 
-
+6. Decidimos usar Live Share para realizar pair programming remoto en línea y en
+   tiempo real, viendo los cambios del código de cada integrante.
+7. Usamos GitHub para trabajar en distintos momentos y conservar el historial
+   de las implementaciones.
 
 ## Revisión cruzada
 
@@ -64,3 +63,4 @@ Endpoint de referencia:
 ## Reflexión final (150–200 palabras)
 Explica el principal aprendizaje técnico, una dificultad relevante y una decisión que haya surgido del trabajo Driver/Navigator.
 
+Andres Herrera Oettinghaus: Esta práctica ha sido bastante enriquecedora. Implementamos las modalidades de remote pair programming y driver-navigator, lo que nos permitió familiarizarnos con herramientas como GitHub y Visual Studio Live Share. Durante la dinámica de driver-navigator, asumí principalmente el rol de navegador: observé las modificaciones en el código, hice preguntas sobre los cambios y aporté mis ideas sobre la dirección del proyecto (por ejemplo, inicializar el repositorio en GitHub antes de escribir código o decidir si utilizar Live Server). Sin lugar a duda, al ser el integrante menos técnico del equipo, el intercambio de conocimientos que ofrece esta forma de trabajo fue muy valioso para mí. Dado que mi compañero ya cuenta con experiencia en la industria, he aprendido al verlo trabajar y dialogar con él.
