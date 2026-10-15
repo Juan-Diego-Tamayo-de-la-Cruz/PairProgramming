@@ -1,6 +1,6 @@
 name: Deploy static site to GitHub Pages
 
-on:
+'on':
   push:
     branches:
       - main
@@ -30,7 +30,7 @@ jobs:
           mkdir -p _site
           rsync -av --delete \
             --exclude '.git' \
-            --exclude '.github' \
+            --exclude '.github/workflows/pages.yml' \
             ./ _site/
 
       - name: Upload Pages artifact
